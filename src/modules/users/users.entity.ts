@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { ListaCompras } from '../auth/list/list.buy.entity';
 
 @Entity('usuarios') 
 export class User {
@@ -14,6 +15,11 @@ export class User {
   @Column()
   senha: string;
 
+  @OneToMany(() => ListaCompras, (lista) => lista.id_criador)
+  listas: ListaCompras[];
+  
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   data_criacao: Date;
 }
+
+
