@@ -1,24 +1,22 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UsersModule } from './modules/users/users.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import * as dotenv from 'dotenv';
-
-dotenv.config();
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'mysql',  // ✅ REMOVA `driver: 'mysql12'` → Não existe essa opção
+      type: 'mysql',
       host: process.env.MYSQL_HOST || 'localhost',
-      port: process.env.MYSQL_PORT ? parseInt(process.env.MYSQL_PORT, 10) : 3306,
+      port: Number(process.env.MYSQL_PORT) || 3306,
       username: process.env.MYSQL_USER || 'root',
       password: process.env.MYSQL_PASSWORD || '',
       database: process.env.MYSQL_DATABASE || 'database',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      autoLoadEntities: true,  // ✅ Evita necessidade de listar entidades manualmente
-      synchronize: true,  // ✅ Apenas para desenvolvimento! Desative em produção
+      autoLoadEntities: true,
+      synchronize: true,
     }),
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
