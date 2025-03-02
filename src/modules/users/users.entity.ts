@@ -15,7 +15,7 @@ export class User {
   @Column()
   senha: string;
 
-  @OneToMany(() => ListaCompras, (lista) => lista.id_criador)
+  @OneToMany(() => ListaCompras, (lista) => lista.criador)
   listas: ListaCompras[];
   
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })

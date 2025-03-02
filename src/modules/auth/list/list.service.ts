@@ -18,7 +18,7 @@ export class ListasService {
         const criador = await this.userRepository.findOne({ where: { id: idCriador } });
         if (!criador) throw new Error("Usuário não encontrado");
 
-        const novaLista = this.listasRepository.create({ nome, id_criador: criador });
+        const novaLista = this.listasRepository.create({ nome, criador: criador });
         return this.listasRepository.save(novaLista);
     }
 

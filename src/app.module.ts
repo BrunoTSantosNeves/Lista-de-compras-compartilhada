@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './modules/users/users.module';
+import { ListasModule } from './modules/auth/list/list.module'; 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
@@ -13,10 +14,11 @@ import { AppService } from './app.service';
       username: process.env.MYSQL_USER || 'root',
       password: process.env.MYSQL_PASSWORD || '',
       database: process.env.MYSQL_DATABASE || 'database',
-      autoLoadEntities: true,
+      autoLoadEntities: false,
       synchronize: true,
     }),
     UsersModule,
+    ListasModule, // Adicionando o módulo de listas
   ],
   controllers: [AppController],
   providers: [AppService],

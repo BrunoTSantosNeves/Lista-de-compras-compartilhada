@@ -1,7 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
 import { User } from '../../users/users.entity';
 
-@Entity('lista_compras')
+@Entity('listas_compras') // Definir explicitamente o nome da tabela
 export class ListaCompras {
     @PrimaryGeneratedColumn()
     id: number;
@@ -9,12 +9,13 @@ export class ListaCompras {
     @Column()
     nome: string;
 
-    @ManyToOne(() => User, user => user.listas)
-    id_criador: User;
+    @ManyToOne(() => User, (user) => user.listas, { eager: true })
+    @JoinColumn({ name: 'id_criador' }) 
+    criador: User; 
 
-    @CreateDateColumn()
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     data_criacao: Date;
 
-    @UpdateDateColumn()
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', onUpdate: "CURRENT_TIMESTAMP" })
     data_atualizacao: Date;
 }
