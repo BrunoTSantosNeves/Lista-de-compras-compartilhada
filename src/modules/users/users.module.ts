@@ -5,9 +5,9 @@ import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User])], // 💡 Aqui estamos registrando o repositório do User
+  imports: [TypeOrmModule.forFeature([User])], 
   providers: [UsersService],
   controllers: [UsersController],
-  exports: [TypeOrmModule], // 💡 Precisamos exportar para que ListasModule possa usá-lo
+  exports: [TypeOrmModule], 
 })
 export class UsersModule {}

@@ -18,6 +18,11 @@ export class UsersService {
     const user = await this.usersRepository.findOne({ where: { nome } });
     return user || undefined;
   }
+
+  async findByEmail(email: string): Promise<User | null> {
+    return this.usersRepository.findOne({ where: { email } });
+}
+
   async create(nome: string, email: string, senha: string): Promise<User> {
     const user = this.usersRepository.create({ nome, email, senha });
     return this.usersRepository.save(user);
