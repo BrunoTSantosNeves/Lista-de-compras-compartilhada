@@ -4,6 +4,7 @@ import { UsersModule } from './modules/users/users.module';
 import { ListasModule } from './modules/auth/list/list.module'; 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -18,7 +19,8 @@ import { AppService } from './app.service';
       synchronize: true,
     }),
     UsersModule,
-    ListasModule, // Adicionando o módulo de listas
+    ListasModule,
+    AuthModule, 
   ],
   controllers: [AppController],
   providers: [AppService],
