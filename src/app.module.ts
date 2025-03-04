@@ -5,6 +5,7 @@ import { ListasModule } from './modules/auth/list/list.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './modules/auth/auth.module';
+import { User } from './modules/users/users.entity'; 
 
 @Module({
   imports: [
@@ -15,8 +16,9 @@ import { AuthModule } from './modules/auth/auth.module';
       username: process.env.MYSQL_USER || 'root',
       password: process.env.MYSQL_PASSWORD || '',
       database: process.env.MYSQL_DATABASE || 'database',
-      autoLoadEntities: false,
+      autoLoadEntities: true,
       synchronize: true,
+      entities: [User],
     }),
     UsersModule,
     ListasModule,
