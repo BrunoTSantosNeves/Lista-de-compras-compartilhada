@@ -20,12 +20,15 @@ export class UsersService {
     return user ?? undefined;
   }
 
-  async findByEmail(email: string): Promise<User | null> {
-    const user = await this.usersRepository.findOne({ where: { email } });
-    console.log('🔍 Usuário encontrado:', user);  
-    return user;
-  }
+  async findByEmail(email: string): Promise<User | undefined> {
+    console.log("Buscando usuário com email:", email); // <-- Adicione este log
 
+    const user = await this.usersRepository.findOne({ where: { email } });
+
+    console.log("Usuário encontrado no banco:", user); // <-- Veja se retorna algo
+
+    return user ?? undefined;
+}
   async create(nome: string, email: string, senha: string): Promise<User> {
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(senha, saltRounds); 
@@ -34,3 +37,4 @@ export class UsersService {
     return this.usersRepository.save(user);
   }
 }
+
